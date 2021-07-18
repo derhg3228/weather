@@ -18,18 +18,25 @@ class MainActivity : AppCompatActivity() {
 
         val degreesView = findViewById<TextView>(R.id.degrees)
 
+        /*
+        Магия с интернетом
+         */
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        // Сам сервис
         val service = retrofit.create(ApiService::class.java)
 
+        // Обработка ответа с сервера
         service.getWeather().enqueue(object : Callback<ApiModel> {
+            //Если ошибка
             override fun onFailure(call: Call<ApiModel>, t: Throwable) {
                 Log.e(MainActivity::class.simpleName, t.message.toString())
             }
 
+            //Если пришёл ответ
             override fun onResponse(call: Call<ApiModel>, response: Response<ApiModel>) {
                 val model = response.body()
 
