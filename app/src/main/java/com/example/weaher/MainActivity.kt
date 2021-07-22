@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.weaher.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,11 +13,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
+    //Нужно для доступа к ui элементам
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val degreesView = findViewById<TextView>(R.id.degrees)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         /*
         Магия с интернетом
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 if (model != null){
                     val degrees = (model.main.temp - 273.15).toInt()
                     runOnUiThread {
-                        degreesView.text = "$degrees C"
+                        binding.degrees.text = "$degrees C"
                     }
                 }
             }
