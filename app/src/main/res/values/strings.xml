@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="city">Ижевск</string>
+    <string name="city">Город</string>
     <string name="degrees_standart">20 C</string>
 </resources>
